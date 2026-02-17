@@ -162,6 +162,20 @@ Camino: [(0,0), (1,0), (1,1), ..., (5,5)]
 - Heurística: Distancia Manhattan
 - Complejidad: O(b^d) donde b es el factor de ramificación
 
+## Testing
+
+Para ejecutar los tests unitarios:
+```bash
+python tests/test_laberinto.py
+```
+
+Los tests verifican:
+- Creacion correcta del laberinto
+- Transformacion a grafo
+- Funcionamiento de BFS
+- Funcionamiento de DFS
+- Funcionamiento de A*
+
 ##  Proyecto Académico
 
 **Universidad:** Pontificia Universidad Javeriana  

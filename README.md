@@ -111,23 +111,37 @@ El programa mostrará:
 4. La ruta encontrada por A*
 5. Comparación de rendimiento
 
-## 📊 Ejemplo de Salida
+## Ejemplo de Salida
 ```
 === LABERINTO ORIGINAL ===
-S ■ ■ ■ · · ■ ■ ■ ■
-· · · ■ ■ ■ · · ■ ·
-■ ■ · · · ■ · ■ ■ ■
-...................
+S # # # . . # # # #
+. . . # # # . . # .
+# # . . . # . # # #
+. # # # . # . # . #
+# # . # . # . . # #
+. . . # . M # . # .
+# # # # # . # . # #
+# . . . . # # # . #
+# # # # # # . # . #
+# . # . # . # # # #
 
-=== SOLUCIÓN CON BFS ===
-Ruta encontrada: [(0,0), (1,0), (1,1), ..., (5,5)]
+=== SOLUCION CON BFS ===
+Solucion encontrada!
 Longitud del camino: 12
 Nodos explorados: 45
+Camino: [(0,0), (1,0), (1,1), ..., (5,5)]
 
-=== SOLUCIÓN CON A* ===
-Ruta encontrada: [(0,0), (1,0), (1,1), ..., (5,5)]
+=== SOLUCION CON DFS ===
+Solucion encontrada!
+Longitud del camino: 18
+Nodos explorados: 32
+Camino: [(0,0), (1,0), (2,0), ..., (5,5)]
+
+=== SOLUCION CON A* ===
+Solucion encontrada!
 Longitud del camino: 12
 Nodos explorados: 18
+Camino: [(0,0), (1,0), (1,1), ..., (5,5)]
 ```
 
 ##  Algoritmos Implementados

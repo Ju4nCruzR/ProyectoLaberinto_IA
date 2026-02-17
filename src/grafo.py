@@ -4,12 +4,12 @@ Modulo para transformar el laberinto en un grafo representado como lista de adya
 
 from src.laberinto import Laberinto
 
+
 class Grafo:
     """
     Representa el laberinto como un grafo usando lista de adyacencia.
     
-    Attributos:
-        laberinto (Laberinto): Instancia del laberinto
+    Atributos:
         lista_adyacencia (dict): Diccionario donde cada nodo apunta a sus vecinos
     """
     
@@ -20,22 +20,24 @@ class Grafo:
         Args:
             laberinto (Laberinto): Instancia de la clase Laberinto
         """
-        self.laberinto = laberinto
         self.lista_adyacencia = {}
-        self._construir_grafo()
+        self._construir_grafo(laberinto)
     
-    def _construir_grafo(self):
+    def _construir_grafo(self, laberinto):
         """
         Construye la lista de adyacencia recorriendo todas las celdas transitables.
         Cada nodo (posicion) se mapea a sus vecinos validos con peso 1.
+        
+        Args:
+            laberinto (Laberinto): Instancia del laberinto
         """
-        for fila in range(self.laberinto.dimensiones):
-            for columna in range(self.laberinto.dimensiones):
+        for fila in range(laberinto.filas):
+            for columna in range(laberinto.columnas):
                 posicion = (fila, columna)
                 
                 # Solo agregamos nodos transitables (no paredes)
-                if self.laberinto.es_valido(fila, columna):
-                    vecinos = self.laberinto.obtener_vecinos(posicion)
+                if laberinto.es_valido(fila, columna):
+                    vecinos = laberinto.obtener_vecinos(posicion)
                     
                     # Guardamos los vecinos con peso 1 (cada movimiento cuesta 1)
                     self.lista_adyacencia[posicion] = [(vecino, 1) for vecino in vecinos]

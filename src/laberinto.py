@@ -2,13 +2,15 @@
 Modulo para manejar la lectura y representacion del laberinto.
 """
 
+
 class Laberinto:
     """
-    Representa un laberinto como matriz NxN.
+    Representa un laberinto como matriz de NxM.
     
-    Attributos:
-        matriz (list): Matriz NxN del laberinto
-        dimensiones (int): Tamaño N del laberinto
+    Atributos:
+        matriz (list): Matriz del laberinto
+        filas (int): Numero de filas
+        columnas (int): Numero de columnas
         inicio (tuple): Coordenadas de la entrada (fila, columna)
         meta (tuple): Coordenadas del objetivo (fila, columna)
     """
@@ -18,17 +20,31 @@ class Laberinto:
         Inicializa el laberinto con una matriz.
         
         Args:
-            matriz (list): Matriz NxN donde:
+            matriz (list): Matriz NxM donde:
                 0 = espacio libre
                 1 = pared
                 2 = inicio
                 3 = meta
+                
+        Raises:
+            ValueError: Si la matriz esta vacia, no tiene inicio o no tiene meta
         """
+        if not matriz or not matriz[0]:
+            raise ValueError("La matriz del laberinto no puede estar vacia")
+        
         self.matriz = matriz
-        self.dimensiones = len(matriz)
+        self.filas = len(matriz)
+        self.columnas = len(matriz[0])
+        # Se mantiene 'dimensiones' por compatibilidad con laberintos cuadrados
+        self.dimensiones = self.filas
         self.inicio = None
         self.meta = None
         self._encontrar_inicio_y_meta()
+        
+        if self.inicio is None:
+            raise ValueError("El laberinto no tiene posicion de inicio (valor 2)")
+        if self.meta is None:
+            raise ValueError("El laberinto no tiene posicion de meta (valor 3)")
     
     @staticmethod
     def desde_archivo(ruta_archivo):
@@ -44,15 +60,17 @@ class Laberinto:
         matriz = []
         with open(ruta_archivo, 'r') as archivo:
             for linea in archivo:
-                fila = [int(valor) for valor in linea.strip().split()]
-                matriz.append(fila)
+                linea = linea.strip()
+                if linea:  # Ignorar lineas vacias
+                    fila = [int(valor) for valor in linea.split()]
+                    matriz.append(fila)
         
         return Laberinto(matriz)
     
     def _encontrar_inicio_y_meta(self):
         """Busca las posiciones de inicio (2) y meta (3) en el laberinto"""
-        for fila in range(self.dimensiones):
-            for columna in range(self.dimensiones):
+        for fila in range(self.filas):
+            for columna in range(self.columnas):
                 if self.matriz[fila][columna] == 2:
                     self.inicio = (fila, columna)
                 elif self.matriz[fila][columna] == 3:
@@ -69,7 +87,7 @@ class Laberinto:
         Returns:
             bool: True si la posicion es valida y no es pared
         """
-        if 0 <= fila < self.dimensiones and 0 <= columna < self.dimensiones:
+        if 0 <= fila < self.filas and 0 <= columna < self.columnas:
             return self.matriz[fila][columna] != 1
         return False
     

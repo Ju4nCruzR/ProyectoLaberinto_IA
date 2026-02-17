@@ -3,8 +3,9 @@ Modulo que implementa el algoritmo de busqueda heuristica A*.
 """
 
 import heapq
-from src.nodo import Nodo
+from src.nodo import Nodo, reconstruir_camino
 from src.heuristica import distancia_manhattan
+
 
 def busqueda_a_estrella(grafo, inicio, meta):
     """
@@ -82,20 +83,3 @@ def busqueda_a_estrella(grafo, inicio, meta):
     
     # No se encontro camino
     return None, nodos_explorados
-
-
-def reconstruir_camino(nodo_actual):
-    """
-    Reconstruye el camino desde el inicio hasta el nodo actual.
-    
-    Args:
-        nodo_actual (Nodo): Nodo final del camino
-        
-    Returns:
-        list: Lista de posiciones que forman el camino
-    """
-    camino = []
-    while nodo_actual is not None:
-        camino.append(nodo_actual.posicion)
-        nodo_actual = nodo_actual.padre
-    return camino[::-1] 

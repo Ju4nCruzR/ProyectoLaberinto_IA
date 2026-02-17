@@ -1,25 +1,9 @@
-"""
+""""
 Modulo que implementa algoritmos de busqueda a ciegas: BFS y DFS.
 """
 
 from collections import deque
-from src.nodo import Nodo
-
-def reconstruir_camino(nodo_actual):
-    """
-    Reconstruye el camino desde el inicio hasta el nodo actual.
-    
-    Args:
-        nodo_actual (Nodo): Nodo final del camino
-        
-    Returns:
-        list: Lista de posiciones que forman el camino
-    """
-    camino = []
-    while nodo_actual is not None:
-        camino.append(nodo_actual.posicion)
-        nodo_actual = nodo_actual.padre
-    return camino[::-1]  # Invertir para tener el camino desde inicio a meta
+from src.nodo import Nodo, reconstruir_camino
 
 
 def busqueda_anchura(grafo, inicio, meta):
@@ -115,4 +99,4 @@ def busqueda_profundidad(grafo, inicio, meta):
                 pila.append(nodo_vecino)
     
     # No se encontro camino
-    return None, nodos_explorados 
+    return None, nodos_explorados
